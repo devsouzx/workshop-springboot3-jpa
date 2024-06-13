@@ -29,10 +29,9 @@ public class UserResource {
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User user, UriComponentsBuilder uriComponentsBuilder) {
-        user = userService.insert(user);
-        var uri = uriComponentsBuilder.path("/{id}").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(user);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
